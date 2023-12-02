@@ -30,7 +30,7 @@ export class CatsController {
     @Req() req: Request,
   ): string {
     console.log(query, req);
-    return `find all data ${query}`;
+    return `find all data -- ${query}`;
   }
 
   @Get('/cat1')
