@@ -15,4 +15,8 @@ export class CatsService {
       },
     ];
   }
+
+  create(params) {
+    return params;
+  }
 }

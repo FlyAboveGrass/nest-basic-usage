@@ -15,6 +15,7 @@ import { Request } from 'express';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './cats.dto';
 import { CatFilter } from 'src/error/cat/cat.filter';
+import { CatsPipe } from './cats.pipe';
 
 @Controller('cats')
 export class CatsController {
@@ -32,15 +33,15 @@ export class CatsController {
   }
 
   @Get('/error')
+  @UseFilters(new CatFilter())
   throwError() {
     throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
   }
 
   @Post('/catPost')
-  @UseFilters(new CatFilter())
-  async create(@Body() createCatDto: CreateCatDto) {
-    console.log('🚀-  -> create  -> createCatDto:', createCatDto);
-    throw new ForbiddenException();
+  async create(@Body(new CatsPipe()) createCatDto: CreateCatDto) {
+    // throw new ForbiddenException();
+    return this.catService.create(createCatDto);
   }
 
   // @Post()
