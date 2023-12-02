@@ -23,6 +23,7 @@ import { CatFilter } from 'src/error/cat/cat.filter';
 import { CatsPipe } from './cats.pipe';
 import { AuthGuard } from 'src/guard/auth/auth.guard';
 import { LoggingInterceptor } from 'src/interceptors/logging/logging.interceptor';
+import { GetData } from 'src/decorators/get-data/get-data.decorator';
 
 @Controller('cats')
 @UseGuards(AuthGuard)
@@ -40,8 +41,12 @@ export class CatsController {
   }
 
   @Get('/cat1')
-  findCat1() {
-    return this.catService.findAll();
+  findCat1(@GetData('username') username: string) {
+    console.log('🚀-  -> findCat1  -> username:', username);
+    return {
+      list: this.catService.findAll(),
+      username,
+    };
   }
 
   @Get('/error')
