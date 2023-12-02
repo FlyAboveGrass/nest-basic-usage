@@ -26,7 +26,7 @@ import { LoggingInterceptor } from 'src/interceptors/logging/logging.interceptor
 
 @Controller('cats')
 @UseGuards(AuthGuard)
-@UseInterceptors(LoggingInterceptor)
+// @UseInterceptors(LoggingInterceptor) //请注意，我们传递的是 LoggingInterceptor 类型而不是实例，让框架承担实例化责任并启用依赖注入。
 export class CatsController {
   constructor(private catService: CatsService) {}
 
