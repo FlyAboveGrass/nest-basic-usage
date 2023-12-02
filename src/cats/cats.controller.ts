@@ -13,14 +13,17 @@ import {
   Query,
   Req,
   UseFilters,
+  UseGuards,
 } from '@nestjs/common';
 import { Request, query } from 'express';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './cats.dto';
 import { CatFilter } from 'src/error/cat/cat.filter';
 import { CatsPipe } from './cats.pipe';
+import { AuthGuard } from 'src/guard/auth/auth.guard';
 
 @Controller('cats')
+@UseGuards(AuthGuard)
 export class CatsController {
   constructor(private catService: CatsService) {}
 
