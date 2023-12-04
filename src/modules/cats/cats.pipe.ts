@@ -19,9 +19,8 @@ export class CatsPipe implements PipeTransform {
     const object = evolve({
       age: Number,
     })(plainToInstance(metatype, value));
-    console.log('🚀-  -> transform  -> object:', object);
+
     const errors = await validate(object);
-    console.log('🚀-  -> transform  -> errors:', errors);
     if (errors.length > 0) {
       throw new BadRequestException('Validation failed');
     }

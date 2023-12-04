@@ -42,7 +42,6 @@ export class CatsController {
 
   @Get('/cat1')
   findCat1(@GetData('username') username: string) {
-    console.log('🚀-  -> findCat1  -> username:', username);
     return {
       list: this.catService.findAll(),
       username,
@@ -61,7 +60,6 @@ export class CatsController {
     @Body(new CatsPipe())
     createCatDto: CreateCatDto,
   ) {
-    console.log('🚀-  -> createCatDto:', createCatDto);
     // throw new ForbiddenException();
     return this.catService.create(createCatDto);
   }

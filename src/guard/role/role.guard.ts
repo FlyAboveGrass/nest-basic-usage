@@ -6,7 +6,7 @@ export class RoleGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    // console.log('🚀-  ->  全局守卫 触发！');
+    // console.log('全局守卫 触发！');
     return true;
   }
 }
