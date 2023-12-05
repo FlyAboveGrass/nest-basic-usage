@@ -1,9 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
 import { FeatureService } from './feature.service';
+import { CfgService } from '../cfg/cfg.service';
 
 @Controller('feature')
 export class FeatureController {
-  constructor(private featureService: FeatureService) {}
+  constructor(
+    private featureService: FeatureService,
+    private cfgService: CfgService,
+  ) {}
 
   @Get('/user')
   getUser() {
@@ -13,5 +17,10 @@ export class FeatureController {
   @Get('/host')
   getHost() {
     return this.featureService.getHost();
+  }
+
+  @Get('/url')
+  getUrl() {
+    return this.cfgService.get('url');
   }
 }
