@@ -11,7 +11,6 @@ export class CfgService {
     private configService: ConfigService,
   ) {
     this.envConfig = envNameMap[this.configService.get('env')];
-    console.log('🚀-  -> this.envFile:', this.envConfig);
   }
 
   get(key: string) {
