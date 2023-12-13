@@ -10,6 +10,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { User } from './entity/user.entity';
 import { UserModule } from './modules/user/user.module';
+import { Photo } from './entity/photo.entity';
 
 @Dependencies(DataSource)
 @Module({
@@ -21,7 +22,7 @@ import { UserModule } from './modules/user/user.module';
       username: 'root',
       password: '12345678',
       database: 'test',
-      entities: [User],
+      entities: [User, Photo],
       synchronize: true, // XXX: 不能用于生产环境，否则你可能会丢失数据
     }),
     CatsModule,

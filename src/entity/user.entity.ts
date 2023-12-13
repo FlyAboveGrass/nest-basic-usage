@@ -15,6 +15,6 @@ export class User {
   @Column({ default: true })
   isActive: boolean;
 
-  // @OneToMany((type) => Photo, (photo) => photo.url)
-  // photos: Photo;
+  @OneToMany((type) => Photo, (photo) => photo.url)
+  photos: Photo;
 }
