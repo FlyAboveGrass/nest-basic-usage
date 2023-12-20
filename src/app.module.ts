@@ -8,9 +8,7 @@ import { FeatureModule } from './modules/feature/feature.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { DataSource } from 'typeorm';
-import { User } from './entity/user.entity';
 import { UserModule } from './modules/user/user.module';
-import { Photo } from './entity/photo.entity';
 
 @Dependencies(DataSource)
 @Module({
@@ -22,7 +20,7 @@ import { Photo } from './entity/photo.entity';
       username: 'root',
       password: '12345678',
       database: 'test',
-      entities: [User, Photo],
+      entities: ['dist/*/*.entity{.ts,.js}'],
       synchronize: true, // XXX: 不能用于生产环境，否则你可能会丢失数据
     }),
     CatsModule,
