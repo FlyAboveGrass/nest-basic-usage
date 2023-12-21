@@ -1,28 +1,24 @@
 import {
-  Bind,
   Body,
   Controller,
   DefaultValuePipe,
-  ForbiddenException,
   Get,
   HttpException,
   HttpStatus,
   Param,
-  ParseIntPipe,
   Post,
   Query,
   Req,
   UseFilters,
   UseGuards,
-  UseInterceptors,
+  UsePipes,
 } from '@nestjs/common';
-import { Request, query } from 'express';
+import { Request } from 'express';
 import { CatsService } from './cats.service';
-import { CreateCatDto } from './cats.dto';
+import { CreateCatDto } from './dtos/cats.dto';
 import { CatFilter } from 'src/error/cat/cat.filter';
 import { CatsPipe } from './cats.pipe';
 import { AuthGuard } from 'src/guard/auth/auth.guard';
-import { LoggingInterceptor } from 'src/interceptors/logging/logging.interceptor';
 import { GetData } from 'src/decorators/get-data/get-data.decorator';
 
 @Controller('cats')
@@ -55,11 +51,9 @@ export class CatsController {
   }
 
   @Post('/catPost')
+  @UsePipes(new CatsPipe())
   @UseFilters(new CatFilter())
-  async create(
-    @Body(new CatsPipe())
-    createCatDto: CreateCatDto,
-  ) {
+  async create(@Body() createCatDto: CreateCatDto) {
     // throw new ForbiddenException();
     return this.catService.create(createCatDto);
   }

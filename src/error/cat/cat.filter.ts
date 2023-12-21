@@ -13,9 +13,11 @@ export class CatFilter implements ExceptionFilter {
     // const req = ctx.getRequest<Request>();
     const res = ctx.getResponse<Response>();
     const status = exception.getStatus();
+    const message = exception.getResponse();
 
     res.status(status).json({
       statusCode2: status,
+      msg: typeof message === 'string' ? message : message['message'][0],
     });
   }
 }
