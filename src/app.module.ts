@@ -9,6 +9,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { DataSource } from 'typeorm';
 import { UserModule } from './modules/user/user.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { ClassSerializerInterceptor } from '@nestjs/common';
 
 @Dependencies(DataSource)
 @Module({
@@ -20,7 +22,7 @@ import { UserModule } from './modules/user/user.module';
       username: 'root',
       password: '12345678',
       database: 'test',
-      entities: ['dist/*/*.entity{.ts,.js}'],
+      entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true, // XXX: 不能用于生产环境，否则你可能会丢失数据
     }),
     CatsModule,
@@ -32,7 +34,14 @@ import { UserModule } from './modules/user/user.module';
     UserModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      // 它用于自动将响应对象序列化为普通 JavaScript 对象，并应用 class-transformer 库的转换和排除规则。
+      provide: APP_INTERCEPTOR,
+      useClass: ClassSerializerInterceptor,
+    },
+  ],
 })
 export class AppModule {
   private dataSource;

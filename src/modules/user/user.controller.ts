@@ -11,4 +11,10 @@ export class UserController {
     console.log('🚀-  -> getUserDetail  -> data:', data);
     return data;
   }
+
+  @Get('/:id')
+  async getUser(@Param('id') id: number) {
+    const data = await this.userService.findOne(id);
+    return data;
+  }
 }
