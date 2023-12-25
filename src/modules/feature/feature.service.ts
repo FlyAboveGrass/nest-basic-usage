@@ -6,13 +6,13 @@ export class FeatureService {
   constructor(private configService: ConfigService) {}
 
   getUser() {
-    const dbUser = this.configService.get<string>('DATABASE_USER');
+    const dbUser = this.configService.get<string>('DB_USERNAME');
 
     return dbUser;
   }
 
   getHost() {
-    const dbHost = this.configService.get<string>('database.host');
+    const dbHost = this.configService.get<string>('DB_PORT');
     return dbHost;
   }
 }

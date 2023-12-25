@@ -11,6 +11,7 @@ import { DataSource } from 'typeorm';
 import { UserModule } from './modules/user/user.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ClassSerializerInterceptor } from '@nestjs/common';
+import { ShareModule } from './modules/share/share.module';
 
 @Dependencies(DataSource)
 @Module({
@@ -32,6 +33,7 @@ import { ClassSerializerInterceptor } from '@nestjs/common';
     }),
     FeatureModule,
     UserModule,
+    ShareModule,
   ],
   controllers: [AppController],
   providers: [
